@@ -1,0 +1,46 @@
+{% extends 'base.html' %}<!--{% load static %}-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+<!--    <link rel="stylesheet" href="{% static 'style.css' %}">-->
+<!--</head>-->
+<!--<body>-->
+<!--&lt;!&ndash; Image and text &ndash;&gt;-->
+<!--<nav class="navbar navbar-dark bg-dark">-->
+<!--  <a class="navbar-brand" href="#">-->
+<!--      Online Movie Store-->
+<!--  </a>-->
+<!--</nav>-->
+<!--{% for i in movie_list %}-->
+<!--&lt;!&ndash;<a href="movies/{{i.id}}"-&ndash;&gt;{{i.name}}</a><br>&ndash;&gt;-->
+<!--<a href="{% url 'movieapp:detail' i.id %}">{{i.name}}</a>hello<br>-->
+<!--&lt;!&ndash;it is used alternatively where name in usrl is same as urlname::::name space concept&ndash;&gt;-->
+<!--{% endfor %}-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        {% for i in movie_list %}
+        <div class="col-md-3">
+            <div class="card" >
+<!--                style="width: 18rem;" inaise above div-->
+                <img class="card-img-top" src="{{i.img.url}}" width="250" height="300" alt="">
+                <div class="card-body">
+                    <h5 class="card-title">{{i.name}}</h5>
+                    <p class="card-text">{{i.price}}</p>
+                    <a href="{% url 'movieapp:detail' i.id %}" class="btn btn-primary">More Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

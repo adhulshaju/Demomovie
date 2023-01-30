@@ -1,0 +1,108 @@
+step 1:
+	cd..
+	cd myprojects
+	mkdir inmakes_project_folder
+	cd inmakes_project_folder
+step 2:
+	mkvirtualenv movie
+	pip install django   (==version)
+step 3:
+	django-admin startproject movieproject
+
+***********pycharm**************
+
+step 1:
+	(terminal)
+	workon movie
+	python manage.py starapp movieapp
+step 2:
+	(pycharm)
+	mp:urls:path('',include("movieapp.urls"))           and import include
+	mp:settings:INSTALLED_APPS: registering app in INSTALL_APPS
+			'movieapp',
+	mp;settings:TEMPLATES:DIRS:[os.path.join(BASE_DIR,'templates')],
+step 3:
+	ma:create urls.py
+	ma:urls:(paste code from mp:urls)
+	******[[
+	from django.urls import path
+
+	urlpatterns = [
+	    path('',views.index,name='index')
+	]
+	]]*******
+	(improt views)::from . import views
+step 4:
+	ma:views:create function called index(if HttpResponse import it)
+	*******[[
+	from django.http import HttpResponse
+	from django.shortcuts import render
+
+	# Create your views here.
+	def index(request):
+    		return HttpResponse("hello am new")
+	]]********
+step 5:
+	run and test
+	python manage.py runserver
+	migrations:: pyhton manage.py makemigrations
+			python manage.py migrate
+
+
+**************models:table creations***************
+
+step 1:
+	ma:models:create class then define:eg:
+	class Movie(models.Model):
+    		name=models.CharField(max_length=250)
+    		desc=models.TextField()
+    		year=models.IntegerField()
+step 2:
+	python manage.py makemigrations
+	python manage.py migrate
+	python manage.py runserver
+	(after migration migration folder will be created with table files)
+
+
+*************admin panel creation*************
+step 1:
+	\\create superuser
+	python manage.py createsuperuser
+	\\	Username (leave blank to use 'adhulshajumechery'): admin
+		Email address: admin@gmail.com
+		Password:1234
+		Password (again):1234
+		y/n:y
+
+step 2:
+	runserver
+	enter admin panel by ip/admin/
+step 3:
+	ma:admin:
+		from django.contrib import admin
+
+		from .models import Movie
+
+		# Register your models here.
+		admin.site.register(Movie)
+step 4:
+	ma:models:inside class as sub://    def __str__(self):
+        					return self.name
+step 5:
+	enter data in table in admin panel chrome of ip
+step 6:
+	ma:views:(impor Movie, and create local varialbe movie and import all objects inside def create dictionary context
+		from django.http import HttpResponse
+		from django.shortcuts import render
+		from . models import Movie
+		# Create your views here.
+		def index(request):
+		    movie=Movie.objects.all()
+		    context={
+		        'movie_list':movie
+		    }
+		    return HttpResponse("hello am new",context)
+step 7:
+	create directory templates in main folder
+	create html file
+	in ma:views: change HttpResponse to render(request)
